@@ -22,10 +22,11 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: '14'
+          node-version: '18'
       
       - name: Install Angular CLI
         run: npm install -g @angular/cli 
+        working-directory: ./front 
 
       - name: Install dependencies
         run: npm install
@@ -42,13 +43,15 @@ jobs:
         with:
           name: Unit Tests         
           path: reports/test-results.xml  
-          reporter: jest-junit        
+          reporter: jest-junit       
+        working-directory: ./front  
 
       - name: Create coverage report
         uses: codecov/codecov-action@v3
         with:
           file: ./coverage/front/lcov-report/index.html
           fail_ci_if_error: true
+        working-directory: ./front    
 
   build:
     name: Build front app
@@ -56,4 +59,5 @@ jobs:
     needs: tests
     steps:
       - name: Build Frontend
-        run: ng build --prod   
+        run: ng build --prod
+        working-directory: ./front      
