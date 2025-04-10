@@ -35,14 +35,12 @@ jobs:
           name: Java Tests
           path: back/target/surefire-reports/*.xml
           reporter: java-junit     
-        working-directory: ./back      
 
       - name: Create coverage report
         uses: codecov/codecov-action@v3
         with:
           file: ./back/target/site/jacoco/jacoco.xml
           fail_ci_if_error: true
-        working-directory: ./back
 
   build:
     name: Build back app

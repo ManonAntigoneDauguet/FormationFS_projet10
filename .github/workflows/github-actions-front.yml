@@ -26,7 +26,6 @@ jobs:
       
       - name: Install Angular CLI
         run: npm install -g @angular/cli 
-        working-directory: ./front 
 
       - name: Install dependencies
         run: npm install
@@ -44,14 +43,12 @@ jobs:
           name: Unit Tests         
           path: reports/test-results.xml  
           reporter: jest-junit       
-        working-directory: ./front  
 
       - name: Create coverage report
         uses: codecov/codecov-action@v3
         with:
           file: ./coverage/front/lcov-report/index.html
           fail_ci_if_error: true
-        working-directory: ./front    
 
   build:
     name: Build front app
