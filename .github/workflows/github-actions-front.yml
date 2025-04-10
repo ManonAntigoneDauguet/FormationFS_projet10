@@ -44,12 +44,6 @@ jobs:
           path: reports/test-results.xml  
           reporter: jest-junit       
 
-      - name: Create coverage report
-        uses: codecov/codecov-action@v3
-        with:
-          file: ./coverage/front/lcov-report/index.html
-          fail_ci_if_error: true
-
   build:
     name: Build front app
     runs-on: ubuntu-latest
