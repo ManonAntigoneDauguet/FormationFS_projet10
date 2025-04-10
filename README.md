@@ -44,7 +44,7 @@ Launch Back-end:
 
 Launch the tests:
 
-> mvn clean install
+> mvn test
 
 ### Docker
 

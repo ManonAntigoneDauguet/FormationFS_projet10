@@ -1,0 +1,28 @@
+name: GitHub Actions BobApp Back
+run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
+on: 
+  push:
+    branches:
+      - main
+      - develop
+      - feature/github-actions
+  pull_request:
+    branches:
+      - main
+      - develop
+
+jobs:
+  build-test:
+    name: Build & Test back
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2   
+
+      - name: Install dependencies
+        run: mvn clean install
+        working-directory: ./back       
+
+      - name: Run tests
+        run: mvn test
+        working-directory: ./back             
