@@ -24,7 +24,7 @@ jobs:
         working-directory: ./front       
 
       - name: Run tests
-        run: ng test --watch=false --code-coverage
+        run: ng test
         working-directory: ./front             
 
       - name: Create test report
