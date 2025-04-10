@@ -41,7 +41,7 @@ jobs:
         if: success() || failure()   
         with:
           name: Unit Tests         
-          path: ./front/reports/test-results.xml  
+          path: front/reports/test-results.xml  
           reporter: jest-junit       
 
   build:
