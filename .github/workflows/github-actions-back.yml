@@ -23,6 +23,19 @@ jobs:
         run: mvn clean install
         working-directory: ./back       
 
-      - name: Run tests
-        run: mvn test
-        working-directory: ./back             
+      - name: Run tests with coverage
+        run: mvn clean verify
+        working-directory: ./back
+
+      - name: Create test report
+        uses: phoenix-actions/test-reporting@v8
+        id: test-report
+        if: success() || failure()
+        with:
+          name: Java Tests
+          path: back/target/surefire-reports/*.xml
+          reporter: java-junit           
+
+      - name: Read output variables
+        run: |
+          echo "url is ${{ steps.test-report.outputs.runHtmlUrl }}"

@@ -24,7 +24,7 @@ jobs:
         working-directory: ./front       
 
       - name: Run tests
-        run: npm run test
+        run: ng test --watch=false --code-coverage
         working-directory: ./front             
 
       - name: Create test report
@@ -32,8 +32,8 @@ jobs:
         id: test-report         
         if: success() || failure()   
         with:
-          name: JEST Tests         
-          path: reports/jest-*.xml   
+          name: Unit Tests         
+          path: reports/test-results.xml  
           reporter: jest-junit        
 
       - name: Read output variables
