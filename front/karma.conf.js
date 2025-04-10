@@ -2,6 +2,8 @@
 // https://karma-runner.github.io/1.0/config/configuration-file.html
 
 module.exports = function (config) {
+  const isCI = process.env.CI || false; // Checks if we are in a CI env
+
   config.set({
     basePath: '',
     frameworks: ['jasmine', '@angular-devkit/build-angular'],
@@ -44,7 +46,7 @@ module.exports = function (config) {
     colors: true,
     logLevel: config.LOG_INFO,
     autoWatch: true,
-    browsers: ['Chrome'],
+    browsers: isCI ? ['ChromeHeadless'] : ['Chrome'],
     singleRun: false,
     restartOnFileChange: true
   });

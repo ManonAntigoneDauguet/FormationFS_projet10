@@ -41,7 +41,7 @@ jobs:
         if: success() || failure()   
         with:
           name: Unit Tests         
-          path: reports/test-results.xml  
+          path: ./front/reports/test-results.xml  
           reporter: jest-junit       
 
   build:
@@ -51,7 +51,7 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2   
-        
+
       - name: Build front
         run: ng build --prod
         working-directory: ./front      
