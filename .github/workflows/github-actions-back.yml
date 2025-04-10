@@ -41,6 +41,9 @@ jobs:
     runs-on: ubuntu-latest
     needs: tests
     steps:
-      - name: Build Frontend
-        run: ...
+      - name: Checkout code
+        uses: actions/checkout@v2   
+
+      - name: Build back
+        run: mvn compile
         working-directory: ./back   

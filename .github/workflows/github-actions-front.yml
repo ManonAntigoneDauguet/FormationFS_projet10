@@ -49,6 +49,9 @@ jobs:
     runs-on: ubuntu-latest
     needs: tests
     steps:
-      - name: Build Frontend
+      - name: Checkout code
+        uses: actions/checkout@v2   
+        
+      - name: Build front
         run: ng build --prod
         working-directory: ./front      
