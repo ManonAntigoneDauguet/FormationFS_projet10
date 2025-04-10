@@ -36,6 +36,8 @@ jobs:
           path: back/target/surefire-reports/*.xml
           reporter: java-junit           
 
-      - name: Read output variables
-        run: |
-          echo "url is ${{ steps.test-report.outputs.runHtmlUrl }}"
+      - name: Create coverage report
+        uses: codecov/codecov-action@v3
+        with:
+          file: ./back/target/site/jacoco-coverage/jacoco.xml
+          fail_ci_if_error: true
