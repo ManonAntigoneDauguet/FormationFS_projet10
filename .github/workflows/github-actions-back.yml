@@ -76,13 +76,10 @@ jobs:
           distribution: 'temurin'
 
       - name: SonarQube scan
-        uses: sonarsource/sonarcloud-github-action@4
-        with:
-          projectBaseDir: app/src
-          args: >
-            -Dsonar.projectKey=ManonAntigoneDauguet_FormationFS_projet10 
-            -Dsonar.organization=bobapp-mad 
-            -Dsonar.host.url=https://sonarcloud.io 
-            -Dsonar.coverage.jacoco.xmlReportPaths=target/site/jacoco/jacoco.xml
-        env:
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        run: mvn sonar:sonar 
+          -Dsonar.projectKey=ManonAntigoneDauguet_FormationFS_projet10 
+          -Dsonar.organization=bobapp-mad 
+          -Dsonar.host.url=https://sonarcloud.io 
+          -Dsonar.login=${{ secrets.SONAR_TOKEN }} 
+          -Dsonar.coverage.jacoco.xmlReportPaths=target/site/jacoco/jacoco.xml
+        working-directory: ./back
