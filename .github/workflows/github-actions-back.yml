@@ -57,10 +57,11 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2   
 
+      - name: Setup SonarCloud
+        uses: sonarsource/sonarcloud-github-action@v5.0.0
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+
       - name: Install dependencies
         run: mvn clean verify
-        working-directory: ./back      
-
-      - name: SonarQube scan
-        run: mvn sonar:sonar
         working-directory: ./back
