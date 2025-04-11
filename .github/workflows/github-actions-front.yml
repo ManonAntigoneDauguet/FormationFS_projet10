@@ -15,9 +15,14 @@ jobs:
   tests:
     name: Test front app
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./front
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2   
+        uses: actions/checkout@v2 
+        with:
+          fetch-depth: 0   
 
       - name: Set up Node.js
         uses: actions/setup-node@v2
@@ -29,54 +34,59 @@ jobs:
 
       - name: Install dependencies
         run: npm install
-        working-directory: ./front       
 
       - name: Run tests
         run: ng test --watch=false --code-coverage
-        working-directory: ./front             
 
   build:
     name: Build front app
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./front
     needs: tests
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2  
+        uses: actions/checkout@v2 
+        with:
+          fetch-depth: 0  
 
       - name: Install Angular CLI
         run: npm install -g @angular/cli 
 
       - name: Install dependencies
         run: npm install
-        working-directory: ./front        
 
       - name: Build front
         run: ng build
-        working-directory: ./front   
 
   sonar-analysis:
     name: Analyse front app with sonar
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./front
     needs: build
     environment: bobapp
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
+        with:
+          fetch-depth: 0 
 
       - name: Install Angular CLI
         run: npm install -g @angular/cli 
 
       - name: Install dependencies
         run: npm install
-        working-directory: ./front        
 
       - name: SonarQube scan
         uses: sonarsource/sonarcloud-github-action@v5
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         with:
-          projectBaseDir: ./front
           args: >
             -Dsonar.projectKey=ManonAntigoneDauguet_FormationFS_projet10 
             -Dsonar.organization=bobapp-mad 
+            -Dsonar.sources=src
             -Dsonar.javascript.lcov.reportPaths=coverage/lcov.info
