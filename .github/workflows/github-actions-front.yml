@@ -55,7 +55,7 @@ jobs:
         working-directory: ./front   
 
   sonar-analysis:
-    name: Analyse back app with sonar
+    name: Analyse front app with sonar
     runs-on: ubuntu-latest
     needs: build
     environment: bobapp
@@ -75,6 +75,7 @@ jobs:
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         with:
+          projectBaseDir: ./front
           args: >
             -Dsonar.projectKey=ManonAntigoneDauguet_FormationFS_projet10 
             -Dsonar.organization=bobapp-mad 
