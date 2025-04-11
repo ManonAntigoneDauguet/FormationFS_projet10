@@ -80,9 +80,8 @@ jobs:
         with:
           projectBaseDir: ./back
           args: >
-            -Dsonar.projectKey=ManonAntigoneDauguet_FormationFS_projet10 \
-            -Dsonar.organization=bobapp-mad \
-            -Dsonar.host.url=https://sonarcloud.io \
+            -Dsonar.projectKey=ManonAntigoneDauguet_FormationFS_projet10
+            -Dsonar.organization=bobapp-mad
             -Dsonar.coverage.jacoco.xmlReportPaths=target/site/jacoco/jacoco.xml
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
