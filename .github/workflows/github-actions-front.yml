@@ -35,22 +35,20 @@ jobs:
         run: ng test --watch=false --code-coverage
         working-directory: ./front             
 
-      - name: Create test report
-        uses: phoenix-actions/test-reporting@v8
-        id: test-report         
-        if: success() || failure()   
-        with:
-          name: Unit Tests         
-          path: front/reports/test-results.xml  
-          reporter: jest-junit       
-
   build:
     name: Build front app
     runs-on: ubuntu-latest
     needs: tests
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2   
+        uses: actions/checkout@v2  
+
+      - name: Install Angular CLI
+        run: npm install -g @angular/cli 
+
+      - name: Install dependencies
+        run: npm install
+        working-directory: ./front        
 
       - name: Build front
         run: ng build --prod
