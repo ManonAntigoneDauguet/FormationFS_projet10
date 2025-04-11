@@ -39,10 +39,22 @@ jobs:
       - name: Create coverage report
         uses: irongut/CodeCoverageSummary@v1.3.0
         with:
-          filename: ../../back/target/site/jacoco/jacoco.xml
+          filename: jacoco.xml
 
   build:
     name: Build back app
+    runs-on: ubuntu-latest
+    needs: tests
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2   
+
+      - name: Build back
+        run: mvn compile
+        working-directory: ./back   
+
+  sonar analysis:
+    name: Analyse back app with sonar
     runs-on: ubuntu-latest
     needs: tests
     steps:
