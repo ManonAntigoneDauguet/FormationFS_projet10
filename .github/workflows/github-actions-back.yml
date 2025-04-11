@@ -76,7 +76,7 @@ jobs:
           distribution: 'temurin'
 
       - name: Setup SonarCloud
-        uses: sonarsource/sonarcloud-github-action@v1.3
+        uses: sonarsource/sonarcloud-github-action@v2
         with:
           projectBaseDir: ./back
           args: >
