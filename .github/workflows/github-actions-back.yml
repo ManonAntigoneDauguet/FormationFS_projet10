@@ -70,9 +70,6 @@ jobs:
   sonar-analysis:
     name: Analyse back app with sonar
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: ./back
     needs: build
     environment: bobapp
     steps:
@@ -89,6 +86,7 @@ jobs:
 
       - name: Install dependencies
         run: mvn clean verify
+        working-directory: ./back
 
       - name: SonarQube scan back
         run: mvn sonar:sonar
@@ -97,3 +95,4 @@ jobs:
           -Dsonar.host.url=https://sonarcloud.io
           -Dsonar.token=${{ secrets.SONAR_TOKEN }}
           -Dsonar.coverage.jacoco.xmlReportPaths=target/site/jacoco/jacoco.xml
+        working-directory: ./back
