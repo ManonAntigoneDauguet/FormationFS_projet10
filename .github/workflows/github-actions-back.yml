@@ -19,6 +19,12 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2   
 
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
       - name: Install dependencies
         run: mvn clean install
         working-directory: ./back       
@@ -44,6 +50,12 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2   
 
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
       - name: Build back
         run: mvn compile
         working-directory: ./back   
@@ -56,6 +68,12 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2   
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+          distribution: 'temurin'
 
       - name: Setup SonarCloud
         uses: sonarsource/sonarcloud-github-action@v1.3
