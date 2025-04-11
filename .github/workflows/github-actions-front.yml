@@ -86,7 +86,7 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         with:
           args: >
-            -Dsonar.projectKey=ManonAntigoneDauguet_FormationFS_projet10 
+            -Dsonar.projectKey=bobapp-mad_FormationFS_projet10 
             -Dsonar.organization=bobapp-mad 
             -Dsonar.sources=./front/src
             -Dsonar.javascript.lcov.reportPaths=./front/coverage/lcov.info
