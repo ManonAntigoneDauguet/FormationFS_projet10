@@ -58,9 +58,15 @@ jobs:
         uses: actions/checkout@v2   
 
       - name: Setup SonarCloud
-        uses: sonarsource/sonarcloud-github-action@v5.0.0
-        env:
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        uses: sonarsource/sonarcloud-github-action@v1.3
+        with:
+          projectBaseDir: ./back
+          args: >
+            -Dsonar.projectKey=ManonAntigoneDauguet_FormationFS_projet10 \
+            -Dsonar.organization=bobapp-mad \
+            -Dsonar.host.url=https://sonarcloud.io \
+            -Dsonar.login=${{ secrets.SONAR_TOKEN }} \
+            -Dsonar.coverage.jacoco.xmlReportPaths=target/site/jacoco/jacoco.xml
 
       - name: Install dependencies
         run: mvn clean verify
