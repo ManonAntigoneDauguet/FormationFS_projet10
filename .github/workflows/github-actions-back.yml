@@ -76,7 +76,7 @@ jobs:
           distribution: 'temurin'
 
       - name: SonarQube scan
-        uses: sonarsource/sonarcloud-github-action@5.0.0
+        uses: sonarsource/sonarcloud-github-action@4
         with:
           projectBaseDir: app/src
           args: >
