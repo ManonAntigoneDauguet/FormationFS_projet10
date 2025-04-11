@@ -59,7 +59,3 @@ jobs:
       - name: Install dependencies
         run: mvn clean install
         working-directory: ./back       
-
-      - name: Build back
-        run: mvn compile
-        working-directory: ./back   

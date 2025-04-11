@@ -51,5 +51,5 @@ jobs:
         working-directory: ./front        
 
       - name: Build front
-        run: ng build --prod
+        run: ng build
         working-directory: ./front      
