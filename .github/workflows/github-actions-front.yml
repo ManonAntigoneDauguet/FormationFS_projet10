@@ -80,7 +80,7 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: SonarQube scan
+      - name: SonarQube scan front
         uses: sonarsource/sonarcloud-github-action@v5
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
@@ -88,5 +88,5 @@ jobs:
           args: >
             -Dsonar.projectKey=ManonAntigoneDauguet_FormationFS_projet10 
             -Dsonar.organization=bobapp-mad 
-            -Dsonar.sources=src
-            -Dsonar.javascript.lcov.reportPaths=coverage/lcov.info
+            -Dsonar.sources=./front/src
+            -Dsonar.javascript.lcov.reportPaths=./front/coverage/lcov.info

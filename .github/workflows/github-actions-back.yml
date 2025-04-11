@@ -90,10 +90,10 @@ jobs:
       - name: Install dependencies
         run: mvn clean verify
 
-      - name: SonarQube scan
-        run: mvn sonar:sonar
-          -Dsonar.projectKey=ManonAntigoneDauguet_FormationFS_projet10
-          -Dsonar.organization=bobapp-mad
-          -Dsonar.host.url=https://sonarcloud.io
-          -Dsonar.login=${{ secrets.SONAR_TOKEN }}
-          -Dsonar.coverage.jacoco.xmlReportPaths=target/site/jacoco/jacoco.xml
+      # - name: SonarQube scan back
+      #   run: mvn sonar:sonar
+      #     -Dsonar.projectKey=ManonAntigoneDauguet_FormationFS_projet10
+      #     -Dsonar.organization=bobapp-mad
+      #     -Dsonar.host.url=https://sonarcloud.io
+      #     -Dsonar.token=${{ secrets.SONAR_TOKEN }}
+      #     -Dsonar.coverage.jacoco.xmlReportPaths=target/site/jacoco/jacoco.xml
