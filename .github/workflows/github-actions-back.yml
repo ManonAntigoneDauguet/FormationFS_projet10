@@ -52,10 +52,19 @@ jobs:
     name: Analyse back app with sonar
     runs-on: ubuntu-latest
     needs: build
+    environment: sonarcloud
     steps:
       - name: Checkout code
         uses: actions/checkout@v2   
 
       - name: Install dependencies
-        run: mvn clean install
-        working-directory: ./back       
+        run: mvn clean verify
+        working-directory: ./back      
+
+      - name: SonarQube Scan
+        run: mvn sonar:sonar \
+          -Dsonar.projectKey=ManonAntigoneDauguet_FormationFS_projet10 \ 
+          -Dsonar.host.url=https://sonarcloud.io \ 
+          -Dsonar.login=${{ secrets.SONAR_TOKEN }} \
+          -Dsonar.coverage.jacoco.xmlReportPaths=target/site/jacoco/jacoco.xml
+        working-directory: ./back
