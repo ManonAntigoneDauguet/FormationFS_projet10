@@ -62,5 +62,5 @@ jobs:
         working-directory: ./back      
 
       - name: SonarQube scan
-        run: mvn sonar:sonar -Dsonar.projectKey=ManonAntigoneDauguet_FormationFS_projet10 -Dsonar.organization=bobapp-mad -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=${{ secrets.SONAR_TOKEN }} -Dsonar.coverage.jacoco.xmlReportPaths=target/site/jacoco/jacoco.xml
+        run: mvn sonar:sonar
         working-directory: ./back
