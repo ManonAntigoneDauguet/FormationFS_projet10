@@ -1,5 +1,5 @@
 name: GitHub Actions BobApp Back
-run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
+run-name: Bobapp Backend CI for ${{ github.actor }} 🚀
 on: 
   push:
     branches:
