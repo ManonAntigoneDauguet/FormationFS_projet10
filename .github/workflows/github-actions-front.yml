@@ -5,7 +5,7 @@ on:
     branches:
       - main
       - develop
-      - feature/github-actions
+      - feature/ci-cd
   pull_request:
     branches:
       - main
@@ -38,6 +38,9 @@ jobs:
       - name: Run tests
         run: ng test --watch=false --code-coverage
 
+      - name: Confirm tests front
+        run: echo "Test front side succeeded!"
+
   build:
     name: Build front app
     runs-on: ubuntu-latest
@@ -59,6 +62,9 @@ jobs:
 
       - name: Build front
         run: ng build
+
+      - name: Confirm build front
+        run: echo "Build front side succeeded!"
 
   sonar-analysis:
     name: Analyse front app with sonar
@@ -89,4 +95,36 @@ jobs:
             -Dsonar.projectKey=bobapp-mad_FormationFS_projet10 
             -Dsonar.organization=bobapp-mad 
             -Dsonar.sources=./front/src
-            -Dsonar.javascript.lcov.reportPaths=./front/coverage/lcov.info
+            -Dsonar.javascript.lcov.reportPaths=./front/coverage/coverage.lcov
+
+      - name: Confirm sonar analysis front
+        run: echo "Sonar analysis front side succeeded!"
+
+  docker:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./front
+    needs: sonar-analysis
+    environment: bobapp
+    steps:
+      - name: Login to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ vars.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Build and push
+        uses: docker/build-push-action@v6
+        with:
+          push: true
+          tags: user/app:latest
+
+      - name: Confirm Docker login
+        run: echo "Docker login succeeded!"
