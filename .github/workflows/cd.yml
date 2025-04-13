@@ -1,4 +1,4 @@
-name: GitHub Actions BobApp Front
+name: Bobapp CD
 run-name: Bobapp CD for ${{ github.actor }} 🚀
 on: 
   push:
