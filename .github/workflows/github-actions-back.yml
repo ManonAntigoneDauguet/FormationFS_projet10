@@ -36,7 +36,13 @@ jobs:
     defaults:
       run:
         working-directory: ./back
+    needs: setup
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v2  
+        with:
+          fetch-depth: 0 
+
       - name: Run back tests
         run: mvn clean verify
 
@@ -61,6 +67,11 @@ jobs:
     needs: build
     environment: bobapp
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v2  
+        with:
+          fetch-depth: 0 
+          
       - name: Install dependencies
         run: mvn clean verify
 
