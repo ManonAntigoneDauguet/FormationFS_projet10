@@ -1,19 +1,18 @@
 name: GitHub Actions BobApp Front
-run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
+run-name: Bobapp Frontend CI for ${{ github.actor }} 🚀
 on: 
   push:
     branches:
       - main
       - develop
-      - feature/github-actions
   pull_request:
     branches:
       - main
       - develop
 
 jobs:
-  tests:
-    name: Test front app
+  build:
+    name: Build and test front app
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -35,29 +34,10 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Run tests
+      - name: Run front tests
         run: ng test --watch=false --code-coverage
 
-  build:
-    name: Build front app
-    runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: ./front
-    needs: tests
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2 
-        with:
-          fetch-depth: 0  
-
-      - name: Install Angular CLI
-        run: npm install -g @angular/cli 
-
-      - name: Install dependencies
-        run: npm install
-
-      - name: Build front
+      - name: Build front app
         run: ng build
 
   sonar-analysis:
@@ -70,18 +50,23 @@ jobs:
     environment: bobapp
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v2 
         with:
-          fetch-depth: 0 
+          fetch-depth: 0   
 
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '18'
+      
       - name: Install Angular CLI
         run: npm install -g @angular/cli 
 
       - name: Install dependencies
         run: npm install
-
+          
       - name: SonarQube scan front
-        uses: sonarsource/sonarcloud-github-action@v5
+        uses: sonarsource/sonarqube-scan-action@v5
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         with:
@@ -89,4 +74,4 @@ jobs:
             -Dsonar.projectKey=bobapp-mad_FormationFS_projet10 
             -Dsonar.organization=bobapp-mad 
             -Dsonar.sources=./front/src
-            -Dsonar.javascript.lcov.reportPaths=./front/coverage/lcov.info
+            -Dsonar.javascript.lcov.reportPaths=./front/coverage/coverage.lcov

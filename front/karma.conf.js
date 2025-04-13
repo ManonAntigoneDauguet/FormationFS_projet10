@@ -33,16 +33,10 @@ module.exports = function (config) {
       reporters: [
         { type: 'html' },
         { type: 'text-summary' },
-        { type: 'lcovonly', subdir: 'lcov', file: 'coverage.lcov' }
+        { type: 'lcovonly', file: 'coverage.lcov' }
       ]
     },
-    reporters: ['progress', 'kjhtml', 'junit'],
-    junitReporter: {
-      outputDir: 'reports',
-      outputFile: 'test-results.xml',
-      useBrowserName: false,
-      suite: 'unit-tests'
-    },
+    reporters: ['progress', 'kjhtml'],
     port: 9876,
     colors: true,
     logLevel: config.LOG_INFO,
