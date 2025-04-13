@@ -1,4 +1,4 @@
-name: GitHub Actions BobApp Back
+name: Bobapp CI Back
 run-name: Bobapp Backend CI for ${{ github.actor }} 🚀
 on: 
   push:
