@@ -12,8 +12,8 @@ on:
       - develop
 
 jobs:
-  setup:
-    name: Set up back CI
+  build:
+    name: Build and test back app
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -29,19 +29,6 @@ jobs:
         with:
           java-version: '17'
           distribution: 'temurin'
-
-  build:
-    name: Build and test back app
-    runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: ./back
-    needs: setup
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2  
-        with:
-          fetch-depth: 0 
 
       - name: Run back tests
         run: mvn clean verify
@@ -70,8 +57,14 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2  
         with:
-          fetch-depth: 0 
-          
+          fetch-depth: 0
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+          distribution: 'temurin' 
+
       - name: Install dependencies
         run: mvn clean verify
 
