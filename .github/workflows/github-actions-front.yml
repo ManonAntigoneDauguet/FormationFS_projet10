@@ -5,6 +5,7 @@ on:
     branches:
       - main
       - develop
+      - feature/refactor
   pull_request:
     branches:
       - main
@@ -34,7 +35,7 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Run front tests
+      - name: Run front tests with coverage
         run: ng test --watch=false --code-coverage
 
       - name: Build front app
@@ -74,4 +75,4 @@ jobs:
             -Dsonar.projectKey=bobapp-mad_FormationFS_projet10 
             -Dsonar.organization=bobapp-mad 
             -Dsonar.sources=./front/src
-            -Dsonar.javascript.lcov.reportPaths=./front/coverage/coverage.lcov
+            -Dsonar.javascript.lcov.reportPaths=./front/coverage/bobapp/coverage.lcov

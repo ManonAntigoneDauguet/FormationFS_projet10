@@ -5,6 +5,7 @@ on:
     branches:
       - main
       - develop
+      - feature/refactor
   pull_request:
     branches:
       - main
@@ -29,7 +30,7 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
 
-      - name: Run back tests
+      - name: Test and verify back app
         run: mvn clean verify
 
       - name: Create test report
@@ -40,9 +41,6 @@ jobs:
           name: Java Tests
           path: back/target/surefire-reports/*.xml
           reporter: java-junit    
-
-      - name: Build back app
-        run: mvn compile
 
   sonar-analysis:
     name: Analyse back app with sonar
