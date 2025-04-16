@@ -11,7 +11,7 @@ on:
       - develop
 
 jobs:
-  build:
+  front:
     name: Build and test front app
     runs-on: ubuntu-latest
     defaults:
@@ -40,17 +40,6 @@ jobs:
       - name: Build front app
         run: ng build
 
-  sonar-analysis:
-    name: Analyse front app with sonar
-    runs-on: ubuntu-latest
-    needs: build
-    environment: bobapp
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2 
-        with:
-          fetch-depth: 0   
- 
       - name: SonarQube scan front
         uses: sonarsource/sonarqube-scan-action@v5
         env:
@@ -59,5 +48,5 @@ jobs:
           args: >
             -Dsonar.projectKey=bobapp-mad_FormationFS_projet10 
             -Dsonar.organization=bobapp-mad 
-            -Dsonar.sources=front/src
-            -Dsonar.javascript.lcov.reportPaths=front/coverage/bobapp/lcov.info
+            -Dsonar.sources=src
+            -Dsonar.javascript.lcov.reportPaths=coverage/bobapp/lcov.info
