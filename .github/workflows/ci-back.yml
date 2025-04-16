@@ -61,6 +61,9 @@ jobs:
           java-version: '17'
           distribution: 'temurin' 
 
+      - name: Test and verify back app
+        run: mvn clean verify
+
       - name: SonarQube scan back
         run: mvn sonar:sonar
           -Dsonar.projectKey=ManonAntigoneDauguet_FormationFS_projet10
