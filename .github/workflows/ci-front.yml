@@ -34,7 +34,7 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Run front tests
+      - name: Run front tests with coverage
         run: ng test --watch=false --code-coverage
 
       - name: Build front app
@@ -64,7 +64,13 @@ jobs:
 
       - name: Install dependencies
         run: npm install
-          
+
+      - name: Run front tests with coverage
+        run: ng test --watch=false --code-coverage
+
+      - name: Build front app
+        run: ng build
+
       - name: SonarQube scan front
         uses: sonarsource/sonarqube-scan-action@v5
         env:
@@ -74,4 +80,4 @@ jobs:
             -Dsonar.projectKey=bobapp-mad_FormationFS_projet10 
             -Dsonar.organization=bobapp-mad 
             -Dsonar.sources=./front/src
-            -Dsonar.javascript.lcov.reportPaths=./front/coverage/coverage.lcov
+            -Dsonar.javascript.lcov.reportPaths=./front/coverage/bobapp/lcov.info
