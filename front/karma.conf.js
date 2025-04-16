@@ -33,7 +33,7 @@ module.exports = function (config) {
       reporters: [
         { type: 'html' },
         { type: 'text-summary' },
-        { type: 'lcov', file: 'coverage.lcov' }
+        { type: 'lcov' }
       ]
     },
     reporters: ['progress', 'kjhtml'],
