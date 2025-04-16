@@ -49,5 +49,5 @@ jobs:
           args: >
             -Dsonar.projectKey=bobapp-mad_FormationFS_projet10 
             -Dsonar.organization=bobapp-mad 
-            -Dsonar.sources=src
-            -Dsonar.javascript.lcov.reportPaths=coverage/bobapp/lcov.info
+            -Dsonar.sources=front/src
+            -Dsonar.javascript.lcov.reportPaths=front/coverage/bobapp/lcov.info
