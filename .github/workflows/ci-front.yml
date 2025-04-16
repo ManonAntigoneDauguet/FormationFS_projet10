@@ -52,7 +52,6 @@ jobs:
           fetch-depth: 0   
  
       - name: SonarQube scan front
-        working-directory: front
         uses: sonarsource/sonarqube-scan-action@v5
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
@@ -60,5 +59,5 @@ jobs:
           args: >
             -Dsonar.projectKey=bobapp-mad_FormationFS_projet10 
             -Dsonar.organization=bobapp-mad 
-            -Dsonar.sources=.
+            -Dsonar.sources=front
             -Dsonar.javascript.lcov.reportPaths=coverage/bobapp/lcov.info
