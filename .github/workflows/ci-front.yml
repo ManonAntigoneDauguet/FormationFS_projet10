@@ -43,9 +43,6 @@ jobs:
   sonar-analysis:
     name: Analyse front app with sonar
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: ./front
     needs: build
     environment: bobapp
     steps:
@@ -55,6 +52,7 @@ jobs:
           fetch-depth: 0   
 
       - name: SonarQube scan front
+        working-directory: front
         uses: sonarsource/sonarqube-scan-action@v5
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
