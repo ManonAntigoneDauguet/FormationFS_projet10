@@ -11,8 +11,9 @@ on:
       - develop
 
 jobs:
-  build:
+  back:
     name: Build and test back app
+    environment: bobapp
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -40,29 +41,6 @@ jobs:
           name: Java Tests
           path: back/target/surefire-reports/*.xml
           reporter: java-junit    
-
-  sonar-analysis:
-    name: Analyse back app with sonar
-    runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: ./back
-    needs: build
-    environment: bobapp
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2  
-        with:
-          fetch-depth: 0
-
-      - name: Set up JDK 17
-        uses: actions/setup-java@v3
-        with:
-          java-version: '17'
-          distribution: 'temurin' 
-
-      - name: Test and verify back app
-        run: mvn clean verify
 
       - name: SonarQube scan back
         run: mvn sonar:sonar
