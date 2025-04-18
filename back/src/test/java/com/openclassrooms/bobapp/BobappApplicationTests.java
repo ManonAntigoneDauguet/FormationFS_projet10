@@ -8,9 +8,6 @@ class BobappApplicationTests {
 
 	@Test
 	void contextLoads() {
-		int expected = 42;
-        int actual = 24;
-        assertEquals(expected, actual, "Ce test est censé échouer");
 	}
 
 }
