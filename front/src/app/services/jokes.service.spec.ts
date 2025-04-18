@@ -18,4 +18,11 @@ describe('JokesService', () => {
     expect(service).toBeTruthy();
   });
 
+  describe('Test qui casse', () => {
+    it('devrait échouer', () => {
+      const attendu = 42;
+      const obtenu = 24;
+      expect(obtenu).toBe(attendu);
+    });
+  });
 });

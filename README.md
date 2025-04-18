@@ -84,16 +84,26 @@ Il n'est pas possible de bypass ces règles.
 
 ### Analyse Sonar
 
-La CI/CD de BobApp repose entre autres sur la version gratuite de Sonar Cloud.
+La CI/CD de BobApp repose entre autres sur la version gratuite de Sonar Cloud. Du fait d'être sur la version gratuite, nous utilisons la "Quality Gate" par défaut de SonarCloud : **"Sonar Way"**.
 
+**Mise en place** :   
 Pour mettre en place ce setting, la première étape est de créer un compte Sonar sur [SonarCloud](https://sonarcloud.io/) et de le relier au compte GitHub.  
-Ensuite créez une "organisation". "Analyse new project" pour ajouter un nouveau projet. Parmis ceux proposés vous retrouver celui de votre compte GitHub.  
-⚠ : mettre en place un **"mono-repo"** pour autoriser à avoir deux projets (un back et un front) sur le même projet GitHub.
+Ensuite créez une "organisation". "Analyse new project" pour ajouter un nouveau projet. Parmis ceux proposés vous retrouver celui de votre compte GitHub. ⚠ : mettre en place un **"mono-repo"** pour autoriser à avoir deux projets (un back et un front) sur le même repository GitHub.  
+Lors que vous vous rendrez sur vos nouveaux projets, dans "Informations" vous retrouverez son « Project Key » et son « Organisation Key », à renseigner dans le worflows lors du lancement de l'analyse.  
+Dans "Administration" vous aurez accès à l'onglet **"Quality Gate"** où vous pourrez définir et choisir une « Quality Gate ». Elle évalue le projet sur un certaines nombre de critères . En définissant ces critères dans SonarCloud via l'interface web, ces règles s'appliquent à toutes les analyses effectuées par tous les développeurs qui travailleront sur le projet.
 
-Lors que vous vous rendrez sur vos nouveaux projets, dans "Informations" vous retrouverez son « Project Key » et son « Organisation Key », à renseigner dans le worflows lors du lancement de l'analyse.
+Dans les settings de GitHub, ajouter une protection via sur la base des "status checks" renvoyés par les analyses Sonar sur chacun des deux projet Sonar ([voir la partie Protection de branche](#protection-de-branche)).
 
 **SONAR_TOKEN** : Dans l'onglet "Sécurité" de SonarCloud vous pourrez générer un token. Copiez-le et ajoutez-le à votre environnement GitHub ([voir la partie Environnement](#environnement)).
 Ce token sera à renseigner dans le worflows lors du lancement de l'analyse pour permettre la connexion à SonarCloud.
+
+###  CD et déploiement Docker
+<br>
+
+
+
+# 3 - Détails des worflows
+
 
 ### Front : tests, build et analyses
 
@@ -102,5 +112,13 @@ Ce token sera à renseigner dans le worflows lors du lancement de l'analyse pour
 `mvn clean verify` compile le code avant de lancer les tests.  
 Cette étape permet de vérifier que le code compile bien et permet de lancer les tests et de générer le fichier rapport de coverage `jacoco.xml` dans le dossier `./target/site/jacoco`.
 
+<br>
 
-###  CD et déploiement Docker
+# 4 - Métrique initiales
+
+## 4.1 - Analyse Sonar
+
+
+
+## 4.2 - “Notes et avis”
+
