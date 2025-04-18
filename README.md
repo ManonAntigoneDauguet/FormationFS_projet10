@@ -71,7 +71,7 @@ Pipeline BobApp :
    - La step d'analyse sonar inclue les variables nécessaires à la connexion à SonarCloud et aux deux projets (front et back) du monorepo.
 - La fusion d’une pull request vers `main` n'est autorisée que si une analyse sonar est lancée, réussie, et si elle renvoie à GitHub un status de validation (un "status checks"), ceci à la fois pour le projet front et le projet back.
 - Lorsqu'une pull request sur `main` est validée et fusionnée, le worflows `cd.yml` s'enclenche :
-   - Les images Docker du front et du back sont constuite et déployées.   
+   - Les images Docker du front et du back sont construites et déployées.   
    - Cette étape repose sur les Dockerfile situés (généralement) dans les dossiers `./front` et `./back`.
    - La step de login inclue les variables nécessaires à la connexion à Docker Hub.
 
@@ -86,7 +86,7 @@ Dans la partie "Settings" de GitHub, un environnement "bobapp" est créé pour c
 
 ### Protection de branche
 
-La branche `main` est protégée. Les règles de protection de la branche sont ajoutées sur GitHub, dans la partie "Branches" des "Settings" du projet, telle qu'illsutrée ci-après.  
+La branche `main` est protégée. Les règles de protection de la branche sont ajoutées sur GitHub, dans la partie "Branches" des "Settings" du projet, telle qu'illustrée ci-après.  
 
 Avant de pouvoir merger dans `main`, une pull-request est nécessaire, et un "status checks" postitif est requis. Ces status checks sont renvoyés par SonarQubeCloud après analyse, et les "status checks" de notre projet sont spécifiés dans les settings.  
 Il n'est pas possible de bypass ces règles.
@@ -100,7 +100,7 @@ La CI/CD de BobApp repose entre autres sur Sonar Cloud. Du fait d'être sur la v
  - **Mise en place** :  
  
 Pour mettre en place ce setting, la première étape est de créer un compte Sonar sur [SonarCloud](https://sonarcloud.io/) et de le relier au compte GitHub.  
-Ensuite créez une "organisation". "Analyse new project" pour ajouter un nouveau projet. Parmis ceux proposés vous retrouver celui de votre compte GitHub. ⚠ : mettre en place un **"mono-repo"** pour autoriser à avoir deux projets (un back et un front) sur le même repository GitHub.  
+Ensuite créez une "organisation". "Analyse new project" pour ajouter un nouveau projet. Parmi ceux proposés vous retrouver celui de votre compte GitHub. ⚠ : mettre en place un **"mono-repo"** pour autoriser à avoir deux projets (un back et un front) sur le même repository GitHub.  
 Lors que vous vous rendrez sur vos nouveaux projets, dans "Informations" vous retrouverez son **« Project Key »** et son **« Organisation Key »**, à renseigner dans le worflows lors du lancement de l'analyse.  
 Dans "Administration" vous aurez accès à l'onglet **"Quality Gate"** où vous pourrez définir et choisir une « Quality Gate ». Elle évalue le projet sur un certaines nombre de critères . En définissant ces critères dans SonarCloud via l'interface web, ces règles s'appliquent à toutes les analyses effectuées par tous les développeurs qui travailleront sur le projet.  
 ⚠ la première analyse de Sonar se fait sur l'ensemble du code et ne ne doit pas bloquer le merge sur `main`. Sonar évalue le projet sur les différents Kpi, puis, sur les prochaines analyses, seul le nouveau code est évalué et soumis aux seuils des Kpi détaillés ci-après.
@@ -131,7 +131,7 @@ Les **"code smells"** sont des mauvaises pratiques de code n'entraînant pas de 
 
 **New code has sufficient test coverage** :  le nouveau code doit être couvert à au moins 80 % par des tests. Plus un code est testé, plus il est protégé de comportements inattendus et autres régressions, mais un pourcentage supérieur serait superflu.
 
-**New code has limited duplications** : il ne doit pas y avoir plus de 3 % de lignes dupliquées dans le nouveau code. Un code duppliqué est difficile à maintenir, et un code bien factorisé est souvent gage de qualité.
+**New code has limited duplications** : il ne doit pas y avoir plus de 3 % de lignes dupliquées dans le nouveau code. Un code dupliqué est difficile à maintenir, et un code bien factorisé est souvent gage de qualité.
 
 ![Liste des seuils de qualités de "Sonar Way"](./ci-cd-pictures/settings-sonar-way.png)
 
@@ -142,7 +142,7 @@ L'étape CD consiste à créer un nouveau conteneur pour le front et un nouveau 
  - **Mise en place**
 
 Pour utiliser DockerHUb, créez un compte sur [DockerHub](https://hub.docker.com/). Créez ensuite un repository qui contiendra le projet back et front à la fois : il s'agit de l'espace de stockage de DockerHub, où les images sont créées et mises à jour.  
-Les **"tags"** permettent d'identifier les deux projets (front et back) et sont à spécifiés dans le worflows de cd. Lors du premier run de l'étape, l'image avec le tag précisé est créee. Les fois suivantes l'image identifiée est mise à jour.
+Les **"tags"** permettent d'identifier les deux projets (front et back) et sont à spécifiés dans le worflows de cd. Lors du premier run de l'étape, l'image avec le tag précisé est créée. Les fois suivantes l'image identifiée est mise à jour.
 
  - **DOCKERHUB_USERNAME et DOCKERHUB_TOKEN**
 
@@ -158,7 +158,7 @@ Ajoutez ces deux variables à votre environnement GitHub ([voir la partie Enviro
 
 ## 3.1 - Général
 
- - Dans chacun des worflows on commence par nommer l'action et préciser les décelencheurs ([rappel des déclencheurs](#22---règles-cicd-de-bobapp)).  
+ - Dans chacun des worflows on commence par nommer l'action et préciser les déclencheurs ([rappel des déclencheurs](#22---règles-cicd-de-bobapp)).  
 On défini ensuite un job (exemple : "back"), son nom (exemple : "Build and test back app"), puis ses différents "steps".
 
 - L'environnement GitHub ("bobapp") est précisé pour que les variables et secrets utilisés soit retrouvés ([voir partie Environnement](#environnement)).
@@ -166,7 +166,7 @@ On défini ensuite un job (exemple : "back"), son nom (exemple : "Build and test
 - `runs-on: ubuntu-latest` indique que les étapes du job seront exécutées dans un environnement Linux (Ubuntu) propre, hébergé par GitHub Actions.
 
 - Dans les worflows de CI 
-   - la branche par défaut ("working-directory") est spécifiée pour préciser le répertoire dans lequel la step s’éxécute (`./back`ou `./front`).
+   - la branche par défaut ("working-directory") est spécifiée pour préciser le répertoire dans lequel la step s’exécute (`./back`ou `./front`).
    - `actions/checkout@v2` récupère le code source du dépôt GitHub dans le workflow.
 
 ## 3.2 - CI Front : tests, build et analyses
@@ -189,7 +189,7 @@ Lance les tests (mode non interactif) et génère le rapport de coverage.
 L'analyse Sonar requiert un fichier de rapport de couverture de test en `.lcov` (et non en `html` comme dans la configuration initiale). Afin qu'il soit généré, `{ type: 'lcov' }` est ajoutés aux "coverageReporter" dans [la configuration karma](./front/karma.conf.js).
 
 Remarque : les tests entrent en erreur lorsqu'ils sont lancés avec Chrome dans un environnement sans interface graphique, comme dans le cadre des GitHub Actions.  
-Dans [la configuration karma](./front/karma.conf.js) on précise donc l'utilisation de "ChromeHeadless" (ne requierant pas d'interface graphique) lors des tests lorsque nous sommes dans un environnemnt CI.
+Dans [la configuration karma](./front/karma.conf.js) on précise donc l'utilisation de "ChromeHeadless" (ne requierant pas d'interface graphique) lors des tests lorsque nous sommes dans un environnement CI.
 
  - `sonarsource/sonarqube-scan-action@v5` :
 
@@ -230,14 +230,14 @@ Installe "QEMU", un outil d'exécuter des logiciels conçus pour une architectur
 
  - `docker/setup-buildx-action@v3`:
  
-Initialise Buildx, l’outil de build avancé de Docker, qui permet notemment le push direct vers un registre (comme ici). 
+Initialise Buildx, l’outil de build avancé de Docker, qui permet notamment le push direct vers un registre (comme ici). 
 
  - `docker/build-push-action@v6` :
  
 Construit l'image Docker. Cette étape est répétée pour le front et le back, en spécifiant à chaque fois :
 - le contexte à Docker, `./back`ou `./front` (car différent du "working-directory" utilisé par GitHub Actions).
 - `push: true` pour un push automatique de l'image.
-- le tag spécific et different entre front et back, et incluant le nom du repository ([voir partie Docker des Settings](#23---détails-des-settings)).
+- le tag spécifique et différent entre front et back, et incluant le nom du repository ([voir partie Docker des Settings](#23---détails-des-settings)).
 
 <br>
 
@@ -273,10 +273,10 @@ Ci-dessous les résultats de l'analyse Sonar sur le projet côté front et côt�
 
 ![Avis](./ci-cd-pictures/avis.png)
 
-Selon les avis rapportés ci-dessus, il semblerait qu'il y ait des bugs sur la fonctionnalité de suggestion de blagues, notemment sous forme de vidéo.  
+Selon les avis rapportés ci-dessus, il semblerait qu'il y ait des bugs sur la fonctionnalité de suggestion de blagues, notamment sous forme de vidéo.  
 Conséquence de quoi, il n'y a plus de blagues d'affichées au utilisateurs.
 
 La priorité sera donc de réparer cette fonctionnalité clef.
 
 Les utilisateurs rapportent leur frustration sur la latence d'arrivée de patchs correctifs. Je pense qu'avec la mise en place de notre démarche CI/CD aidera sur ce point.   
-Les développeurs pourront participer de façon plus confortable (moins de craintes d'apporter des regressions, règles de commit plus claires...), le code proposé sera automatiquement vérifié et les nouvelles versions automatiquement déployées.
+Les développeurs pourront participer de façon plus confortable (moins de craintes d'apporter des régressions, règles de commit plus claires...), le code proposé sera automatiquement vérifié et les nouvelles versions automatiquement déployées.
