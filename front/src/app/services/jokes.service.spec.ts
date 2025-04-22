@@ -18,4 +18,9 @@ describe('JokesService', () => {
     expect(service).toBeTruthy();
   });
 
+  it('should be failed', () => {
+    const attendu = 42;
+    const obtenu = 24;
+    expect(obtenu).toBe(attendu);
+  });
 });
