@@ -253,21 +253,24 @@ Ci-dessous les résultats de l'analyse Sonar sur le projet côté front et côt�
 
  - **Sécurity = 0, score A :** pas de failles de sécurité.  
  - **Reliability =0, score A :** pas de bugs détectés.  
- - **Maintenability = 6 open issues, score A :** quelques code smells détectés, comme le besoin de préciser « readonly » sur les variables non réassignées, mais rien de majeur.   
- - **Accepted Issues = 0 :** il n’y a pas de « problèmes acceptés ».  
- Dans SonarCloud il existe une possibilité de spécifier que des éléments de code détectés comme bugs, ou vulnérabilité par Sonar n’en sont pas. Ces règles de « faux positifs » sont listées dans cette partie, actuellement vide.
+ - **Maintenability = 6 open issues, score A :** quelques code smells détectés, comme le besoin de préciser « readonly » sur les variables non réassignées, mais rien de majeur.  
+ - **Hotspots Reviewed = 100%** : pas de fonctionnalités critiques attendant une revue manuelle.  
  - **Coverage = 28.6 % :** le code actuel est couvert à 28.6%. Lorsqu’un nouveau code est ajouté, ce nouveau code doit être couvert à 80% minimum pour passer la Gate Way. Conséquence de quoi, ce pourcentage ne devrait qu’augmenter au fur et à mesure des développements.
  - **Duplications = 0.0% :** pas de duplication de code détecté.
+ - **Accepted Issues = 0 :** il n’y a pas de « problèmes acceptés ».  
+ Dans SonarCloud il existe une possibilité de spécifier que des éléments de code détectés comme bugs, ou vulnérabilité par Sonar n’en sont pas. Ces règles de « faux positifs » sont listées dans cette partie, actuellement vide.
 
 ### Projet back
 
  - **Sécurity = 0, score A :** pas de failles de sécurité.  
- - **Reliability = 1, score B :** un bug potentiel est détecté sur le service [JokeService](./back/src/main/java/com/openclassrooms/bobapp/service/JokeService.java) côté back, où Random ne devrait pas être instancié dans une méthode mais stocké en propriété du service. Si ce service, tel quel, était ajouté en nouveau code, l'analyse aurait bloqué la PR.
+ - **Reliability = 1, score D :** un bug potentiel est détecté sur le service [JokeService](./back/src/main/java/com/openclassrooms/bobapp/service/JokeService.java) côté back, où Random ne devrait pas être instancié dans une méthode mais stocké en propriété du service. Si ce service, tel quel, était ajouté en nouveau code, l'analyse aurait bloqué la PR.
  - **Maintenability = 8 open issues, score A :** quelques code smells détectés mais rien de majeur.   
- - **Accepted Issues = 0 :** il n’y a pas de « problèmes acceptés ».  
- Dans SonarCloud il existe une possibilité de spécifier que des éléments de code détectés comme bugs, ou vulnérabilité par Sonar n’en sont pas. Ces règles de « faux positifs » sont listées dans cette partie, actuellement vide.
+ - **Hotspots Reviewed = 0%** : il existe des fonctionnalités critiques (2) attendant une revue manuelle.  
+ La première concerne le fait d'utiliser des nombres générés de façon aléatoire dans [JokeService](./back/src/main/java/com/openclassrooms/bobapp/service/JokeService.java) : Sonar attend que nous validions manuellement l'utilisation de cette fonctionnalité. La deuxième concerne le fait d'utiliser un `e.printStackTrace()` dans [JsonReader.java](./back/src/main/java/com/openclassrooms/bobapp/data/JsonReader.java), habituellement retiré en prod.
  - **Coverage = 38.8 % :** le code actuel est couvert à 38.8%. Lorsqu’un nouveau code est ajouté, ce nouveau code doit être couvert à 80% minimum pour passer la Gate Way. Conséquence de quoi, ce pourcentage ne devrait qu’augmenter au fur et à mesure des développements.
  - **Duplications = 0.0% :** pas de duplication de code détecté.
+ - **Accepted Issues = 0 :** il n’y a pas de « problèmes acceptés ».  
+ Dans SonarCloud il existe une possibilité de spécifier que des éléments de code détectés comme bugs, ou vulnérabilité par Sonar n’en sont pas. Ces règles de « faux positifs » sont listées dans cette partie, actuellement vide.
 
 ## 4.2 - “Notes et avis”
 
